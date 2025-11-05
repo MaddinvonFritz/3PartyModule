@@ -93,6 +93,7 @@
 ; ListEx::GetColumnFromLabel()      - returns column number for this label
 ; ListEx::GetColumnLabel()          - returns the label of the column
 ; ListEx::GetColumnState()          - similar to 'GetGadgetItemState()' for a specific column
+; ListEx::GetItemColor()            - similar to 'GetGadgetItemColor()'
 ; ListEx::GetItemData()             - similar to 'GetGadgetItemData()'
 ; ListEx::GetItemLabel()            - similar to 'GetGadgetItemData()' but with string data
 ; ListEx::GetItemState()            - similar to 'GetGadgetItemState()' [#Selected/#Checked/#Inbetween]
@@ -451,6 +452,7 @@ DeclareModule ListEx
   Declare.i GetColumnFromLabel(GNum.i, Label.s)
   Declare.s GetColumnLabel(GNum.i, Column.i)
   Declare.i GetColumnState(GNum.i, Row.i, Column.i)
+  Declare.i GetItemColor(GNum.i, Row.i, ColorTyp.i, Column.i=#PB_Ignore)
   Declare.i GetItemData(GNum.i, Row.i)
   Declare.s GetItemLabel(GNum.i, Row.i)
   Declare.s GetItemID(GNum.i, Row.i)
@@ -9671,9 +9673,91 @@ Module ListEx
       EndIf
       
     EndIf   
- 
+    
   EndProcedure
-
+  
+  
+  Procedure.i GetItemColor(GNum.i, Row.i, ColorTyp.i, Column.i=#PB_Ignore)
+    ; ColorTyp: #FrontColor / #BackColor / #LineColor / #HeaderFrontColor / #HeaderBackColor / #HeaderLineColor
+    Define.s Key$
+    
+    If FindMapElement(ListEx(), Str(GNum))
+      
+      Select ColorTyp
+        Case #FrontColor ;{ FrontColor
+          If Row = #Header
+            If Column = #PB_Ignore
+              ProcedureReturn ListEx()\Color\HeaderFront
+            Else
+              If SelectElement(ListEx()\Cols(), Column)
+                ProcedureReturn ListEx()\Cols()\Header\FrontColor
+              EndIf  
+            EndIf
+          Else
+            If SelectElement(ListEx()\Rows(), Row)
+              If Column = #PB_Ignore
+                ProcedureReturn ListEx()\Rows()\Color\Front
+              Else
+                If SelectElement(ListEx()\Cols(), Column)
+                  Key$ = ListEx()\Cols()\Key
+                  ProcedureReturn ListEx()\Rows()\Column(Key$)\Color\Front
+                  ;ListEx()\Rows()\Column(Key$)\Flags | #CellFront
+                EndIf
+              EndIf 
+            EndIf
+          EndIf ;}
+        Case #BackColor  ;{ BackColor
+          If Row = #Header
+            If Column = #PB_Ignore
+              ProcedureReturn ListEx()\Color\HeaderBack
+            Else
+              If SelectElement(ListEx()\Cols(), Column)
+                ProcedureReturn ListEx()\Cols()\Header\BackColor
+              EndIf 
+            EndIf
+          Else
+            If SelectElement(ListEx()\Rows(), Row)
+              If Column = #PB_Ignore
+                ProcedureReturn ListEx()\Rows()\Color\Back
+              Else
+                If SelectElement(ListEx()\Cols(), Column)
+                  Key$ = ListEx()\Cols()\Key
+                  ProcedureReturn ListEx()\Rows()\Column(Key$)\Color\Back
+                  ;ListEx()\Rows()\Column(Key$)\Flags | #CellBack
+                EndIf  
+              EndIf 
+            EndIf
+          EndIf ;}
+        Case #LineColor  ;{ LineColor
+          If Row = #Header
+            ProcedureReturn ListEx()\Color\HeaderLine
+          Else
+            If SelectElement(ListEx()\Rows(), Row)
+              If Column = #PB_Ignore
+                ProcedureReturn ListEx()\Rows()\Color\Line
+              Else
+                If SelectElement(ListEx()\Cols(), Column)
+                  Key$ = ListEx()\Cols()\Key
+                  ProcedureReturn ListEx()\Rows()\Column(Key$)\Color\Line
+                  ;ListEx()\Rows()\Column(Key$)\Flags | #CellLine
+                EndIf  
+              EndIf
+            EndIf
+          EndIf ;}
+        Case #HeaderFrontColor
+          ProcedureReturn ListEx()\Color\HeaderFront
+        Case #HeaderBackColor
+          ProcedureReturn ListEx()\Color\HeaderBack
+        Case #HeaderLineColor
+          ProcedureReturn ListEx()\Color\HeaderLine
+      EndSelect
+      
+    EndIf
+    
+    ProcedureReturn -1
+    
+  EndProcedure
+  
   Procedure.i GetItemData(GNum.i, Row.i)
     
     If FindMapElement(ListEx(), Str(GNum))
@@ -11703,9 +11787,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 458
-; FirstLine = 254
-; Folding = 2AggAAAAAAAAEAMAAAAAMAAACAAAgASAAQBAAMAAgJCAAACFYIAATCAg7AF6I+vA+hFIPGBBAGBKMAAACR1AAAAAwAGEBAACAE7
-; Markers = 5469,5716,6348,8296,8579,8580
+; CursorPosition = 9756
+; FirstLine = 2318
+; Folding = 2AggAAAAAAAAEAMAAAAAMAAACAAAgASAAQBAAMAAgJCAAACFYIAATCAg7AF6I+vA+hFIPGBBAGBKMAA+AAAIAAAQAMgBRAAgAAh+
+; Markers = 5471,5718,6350,8298,8581,8582,9679
 ; EnableXP
 ; DPIAware
