@@ -1,6 +1,21 @@
-Purebasic ListEx Module von [Hoeppner1867](https://github.com/Hoeppner1867/PureBasic/commits?author=Hoeppner1867)
+Purebasic Module von [Hoeppner1867](https://github.com/Hoeppner1867/PureBasic/commits?author=Hoeppner1867)
 
-Ein wunderbares ListIconGadget von Hoeppner1867, dass ich für eines meiner Projekte etwas angepasst habe.
+Module von Hoeppner1867, die ich für eines meiner Projekte etwas angepasst habe.
+
+ListEx
+
+- BlendColor ist Transparent
+- Absturz bei Click auf eine leere Fläche
+- Fehler bei GetItemText wenn keine Spalte oder Zeile ausgewählt ist
+- Bessere Unterstützung von Maus und Scrollbar
+- #UseRealStringGadget erzeugt ein StringGadget() zur Eingabe
+- Focus Row bei Tab und ShiftTab (noch Abschaltbar machen?)
+- Add GetFingerprint() - CRC32 Fingerprint des gesamten Textes in der Tabelle
+- GetItemColor()
+
+pbPDF
+
+- Bugfix in MultiCell()
 
 ===== MIT License =====
 
