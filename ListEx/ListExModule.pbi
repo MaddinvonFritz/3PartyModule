@@ -221,6 +221,7 @@ DeclareModule ListEx
     #NumberedColumn
     #SingleClickEdit
     #AutoResize
+    #AutoClose
     #ResizeColumn      ; resize column with mouse (changes the width)
     #AdjustColumns     ; resize column with mouse (no change in width)
     #AdjustRows        ; adjust the row height
@@ -4610,6 +4611,8 @@ Module ListEx
     Define.s Key$, Text$
     Define.i Blend
     
+    Define.i ScrollX, ScrollY
+    
     If ListEx()\Hide : ProcedureReturn #False : EndIf
   
     ;{ _____ ScrollBar _____
@@ -4633,7 +4636,10 @@ Module ListEx
 
     colX = ListEx()\Area\X
     rowY = ListEx()\Area\Y
-    rowHeight = 0    
+    rowHeight = 0  
+    
+;     ScrollX = ListEx()\Col\OffsetX
+;     ScrollY = ListEx()\Row\OffSetY
     
     If StartDrawing(CanvasOutput(ListEx()\CanvasNum))
       
@@ -5359,6 +5365,9 @@ Module ListEx
       StopDrawing()
     EndIf
     ;}
+    
+;     ListEx()\Col\OffsetX = ScrollX
+;     ListEx()\Row\OffSetY = ScrollY
     
   EndProcedure
   
@@ -8238,7 +8247,7 @@ Module ListEx
     
     ForEach ListEx()
     
-      If ListEx()\Window\Num = Window
+      If ListEx()\Window\Num = Window And ListEx()\Flags & #AutoClose
 
         DeleteMapElement(ListEx())
         
@@ -10758,7 +10767,10 @@ Module ListEx
     Define.s Key$
     
     If FindMapElement(ListEx(), Str(GNum))
-    
+      
+      PushListPosition(ListEx()\Rows())
+      PushListPosition(ListEx()\Cols())
+      
       Select ColorTyp
         Case #FrontColor ;{ FrontColor
           If Row = #Header
@@ -10827,6 +10839,9 @@ Module ListEx
         Case #HeaderLineColor
           ListEx()\Color\HeaderLine = Value  
       EndSelect
+      
+      PopListPosition(ListEx()\Cols())
+      PopListPosition(ListEx()\Rows())
       
       If ListEx()\ReDraw : Draw_() : EndIf
     EndIf
@@ -11074,6 +11089,7 @@ Module ListEx
             AdjustRowsHeight_()
             UpdateRowY_()
             AdjustScrollBars_()
+            
             If ListEx()\ReDraw : Draw_(#Horizontal|#Vertical) : EndIf
           EndIf
           
@@ -11787,9 +11803,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 9756
-; FirstLine = 2318
-; Folding = 2AggAAAAAAAAEAMAAAAAMAAACAAAgASAAQBAAMAAgJCAAACFYIAATCAg7AF6I+vA+hFIPGBBAGBKMAA+AAAIAAAQAMgBRAAgAAh+
-; Markers = 5471,5718,6350,8298,8581,8582,9679
+; CursorPosition = 8249
+; FirstLine = 2276
+; Folding = 2CkgAAAAAAAAEwMAgLOANAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnBKsAAcAAAIAAAQBIxBRAAgAAh+
+; Markers = 5480,5727,6359,8307,8590,8591,9688,11080
 ; EnableXP
 ; DPIAware
