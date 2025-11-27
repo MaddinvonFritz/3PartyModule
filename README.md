@@ -13,6 +13,7 @@ ListEx
 - Add GetFingerprint() - CRC32 Fingerprint des gesamten Textes in der Tabelle
 - GetItemColor()
 - Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelöscht werden
+- Add FreeListExGadget() - Gibt das Gadget und wenn Angegeben das Canvas frei
 
 pbPDF
 

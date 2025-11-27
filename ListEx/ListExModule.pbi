@@ -84,6 +84,7 @@
 ; ListEx::EventValue()              - returns value   (string)
 ; ListEx::EventID()                 - returns row ID or header label 
 ; ListEx::ExportCSV()               - export CSV-file from list
+; ListEx::FreeListExGadget()        - Gibt das Gadget und wenn Angegeben das Canvas frei
 ; ListEx::Gadget()                  - [#GridLines|#NumberedColumn|#NoRowHeader|#UseRealStringGadget]
 ; ListEx::GetAttribute()            - similar to 'GetGadgetAttribute()'
 ; ListEx::GetCellText()             - similar to 'GetGadgetItemText()' with labels
@@ -444,6 +445,7 @@ DeclareModule ListEx
   Declare.i EventRow(GNum.i)
   Declare.i EventState(GNum.i)
   Declare.s EventValue(GNum.i)
+  Declare.i FreeListExGadget(Gnum.i, DeleteCanvas.b = #False)
   Declare.i Gadget(GNum.i, X.f, Y.f, Width.f, Height.f, ColTitle.s, ColWidth.f, ColLabel.s="", Flags.i=#False, WindowNum.i=#PB_Default)
   Declare.i GetAttribute(GNum.i, Attribute.i)
   Declare.s GetCellText(GNum.i, Row.i, Label.s)
@@ -9563,6 +9565,30 @@ Module ListEx
   EndProcedure  
   ;- -----------------------------  
   
+  Procedure FreeListExGadget(Gnum.i, DeleteCanvas.b = #False)
+    
+    If FindMapElement(ListEx(), Str(GNum))
+    
+      If DeleteCanvas = #True
+        
+        If GadgetType(Gnum) = #PB_GadgetType_Canvas
+          
+          FreeGadget(Gnum)
+          
+        EndIf
+        
+      EndIf
+
+      DeleteMapElement(ListEx())
+      
+      ProcedureReturn #True
+             
+    EndIf
+    
+    ProcedureReturn #False
+    
+  EndProcedure
+  
   Procedure.i GetAttribute(GNum.i, Attribute.i) 
     
     If FindMapElement(ListEx(), Str(GNum))
@@ -11803,9 +11829,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 8249
-; FirstLine = 2276
-; Folding = 2CkgAAAAAAAAEwMAgLOANAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnBKsAAcAAAIAAAQBIxBRAAgAAh+
-; Markers = 5480,5727,6359,8307,8590,8591,9688,11080
+; CursorPosition = 86
+; FirstLine = 50
+; Folding = 2CkgAAAAAAAAEwMAgLOANAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnBKsgB5AAAQAAAgCQiDiAAABAC0
+; Markers = 5482,5729,6361,8309,8592,8593,9714,11106
 ; EnableXP
 ; DPIAware
