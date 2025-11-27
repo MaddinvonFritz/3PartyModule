@@ -14,6 +14,7 @@ ListEx
 - GetItemColor()
 - Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelöscht werden
 - Add FreeListExGadget() - Gibt das Gadget und wenn Angegeben das Canvas frei
+- Bug? CalcScrollRange_() Scrollbar wird nicht mehr auf 0 zurückgesetzt, wenn sie innerhalb des scrollbereiches liegt
 
 pbPDF
 

@@ -1780,11 +1780,12 @@ Module ListEx
 		If ListEx()\Scrollbar\Flags & #Horizontal
 		  
 		  If ListEx()\HScroll\PageLength
-        ListEx()\HScroll\Pos    = ListEx()\HScroll\Minimum
+        ;ListEx()\HScroll\Pos    = ListEx()\HScroll\Minimum
   		  ListEx()\HScroll\minPos = ListEx()\HScroll\Minimum
   		  ListEx()\HScroll\maxPos = ListEx()\HScroll\Maximum - ListEx()\HScroll\PageLength + 1
   		  ListEx()\HScroll\Ratio  = ListEx()\HScroll\PageLength / ListEx()\HScroll\Maximum
   		  ListEx()\HScroll\Range  = ListEx()\HScroll\maxPos - ListEx()\HScroll\minPos
+  		  If ListEx()\HScroll\Pos < ListEx()\HScroll\minPos And ListEx()\HScroll\Pos > ListEx()\HScroll\maxPos : ListEx()\HScroll\Pos    = ListEx()\HScroll\Minimum : EndIf
   		EndIf 
 
     EndIf
@@ -1792,11 +1793,12 @@ Module ListEx
     If ListEx()\Scrollbar\Flags & #Vertical
       
       If ListEx()\VScroll\PageLength
-        ListEx()\VScroll\Pos    = ListEx()\VScroll\Minimum
+        ;ListEx()\VScroll\Pos    = ListEx()\VScroll\Minimum
   		  ListEx()\VScroll\minPos = ListEx()\VScroll\Minimum
   		  ListEx()\VScroll\maxPos = ListEx()\VScroll\Maximum - ListEx()\VScroll\PageLength + 1
   		  ListEx()\VScroll\Ratio  = ListEx()\VScroll\PageLength / ListEx()\VScroll\Maximum
   		  ListEx()\VScroll\Range  = ListEx()\VScroll\maxPos - ListEx()\VScroll\minPos
+  		  If ListEx()\VScroll\Pos < ListEx()\VScroll\minPos And ListEx()\VScroll\Pos > ListEx()\VScroll\maxPos : ListEx()\VScroll\Pos    = ListEx()\VScroll\Minimum : EndIf
   		EndIf
   		
     EndIf 
@@ -10794,9 +10796,6 @@ Module ListEx
     
     If FindMapElement(ListEx(), Str(GNum))
       
-      PushListPosition(ListEx()\Rows())
-      PushListPosition(ListEx()\Cols())
-      
       Select ColorTyp
         Case #FrontColor ;{ FrontColor
           If Row = #Header
@@ -10865,9 +10864,6 @@ Module ListEx
         Case #HeaderLineColor
           ListEx()\Color\HeaderLine = Value  
       EndSelect
-      
-      PopListPosition(ListEx()\Cols())
-      PopListPosition(ListEx()\Rows())
       
       If ListEx()\ReDraw : Draw_() : EndIf
     EndIf
@@ -11829,9 +11825,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 86
-; FirstLine = 50
-; Folding = 2CkgAAAAAAAAEwMAgLOANAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnBKsgB5AAAQAAAgCQiDiAAABAC0
-; Markers = 5482,5729,6361,8309,8592,8593,9714,11106
+; CursorPosition = 1802
+; FirstLine = 849
+; Folding = 2CkgAAAAAAAAEwMAgLegPAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnDKsgB5AAAQAAAgCQiDiAAABAC0
+; Markers = 5484,5731,6363,8311,8594,8595,9716,11102
 ; EnableXP
 ; DPIAware
