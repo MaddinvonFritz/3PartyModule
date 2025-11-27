@@ -12,6 +12,7 @@ ListEx
 - Focus Row bei Tab und ShiftTab (noch Abschaltbar machen?)
 - Add GetFingerprint() - CRC32 Fingerprint des gesamten Textes in der Tabelle
 - GetItemColor()
+- Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelöscht werden
 
 pbPDF
 
