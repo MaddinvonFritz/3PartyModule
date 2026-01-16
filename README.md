@@ -15,10 +15,12 @@ ListEx
 - Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelöscht werden
 - Add FreeListExGadget() - Gibt das Gadget und wenn Angegeben das Canvas frei
 - Bug? CalcScrollRange_() Scrollbar wird nicht mehr auf 0 zurückgesetzt, wenn sie innerhalb des scrollbereiches liegt
+- Beim Verlassen des Gadget mit der Maus wird BindShortcuts_(#False) und BindTabulator_(#False) aufgerufen. Ansonsten funktionieren Enter und Tab nicht mehr im EditorGadget.
 
 pbPDF
 
 - Bugfix in MultiCell()
+- Add FreePDF()
 
 ===== MIT License =====
 
