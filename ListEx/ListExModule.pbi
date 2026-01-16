@@ -6157,7 +6157,7 @@ Module ListEx
             ListEx()\ListView\Focus = #PB_Default
             
             DrawListView_()
-            
+
             ProcedureReturn #True
             ;}
           Case #PB_EventType_MouseWheel     ;{ Mouse 
@@ -8069,6 +8069,9 @@ Module ListEx
       If ListEx()\ListView\Hide
         Draw_()
       EndIf
+      
+      BindShortcuts_(#False)
+      BindTabulator_(#False)
       
     EndIf
     
@@ -11824,10 +11827,10 @@ CompilerIf #PB_Compiler_IsMainFile
   EndIf
   
 CompilerEndIf
-; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 1802
-; FirstLine = 849
-; Folding = 2CkgAAAAAAAAEwMAgLegPAAACAAAgASAAQBAAMAAgPCAAACHYIAATCA37AF6M+vA+tFIPGBAAnDKsgB5AAAQAAAgCQiDiAAABAC0
-; Markers = 5484,5731,6363,8311,8594,8595,9716,11102
+; IDE Options = PureBasic 6.30 beta 6 (Windows - x64)
+; CursorPosition = 8073
+; FirstLine = 2230
+; Folding = 2CkgAAAAAAAAEwMAgLegPAAACAAAgASAAQBAAMAAgPCAAACHYsEQQCA37AF6M+vQ+tHIPGBAAnDKsgB5AAAQAAAgCQiDiAAABAC0
+; Markers = 5484,5731,6159,6363,8043,8314,8597,8598,9719,11105
 ; EnableXP
 ; DPIAware
