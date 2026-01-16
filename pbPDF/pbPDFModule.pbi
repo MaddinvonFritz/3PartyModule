@@ -59,6 +59,7 @@
   ; ----- Basic Commands -----
 
   ; PDF::Create()                      - Create PDF document.
+  ; PDF::FreePDF()                     - Gibt das PDF frei.
   ; PDF::AddPage()                     - Adds a (new) page to the document.
   ; PDF::BookMark()                    - Add bookmark
   ; PDF::Cell()                        - Prints a cell (rectangular area) with optional borders, background color and character string.
@@ -465,6 +466,7 @@ DeclareModule PDF
   Declare   EnableFooter(ID.i, Flag.i=#True)
   Declare   EnableHeader(ID.i, Flag.i=#True)
   Declare   EnableTOCNums(ID.i, Flag.i=#True)
+  Declare   FreePDF(ID.i)
   Declare   FooterProcedure(*ProcAddress, *StructAddress=#Null)
   Declare.i GetErrorCode(ID.i)
   Declare.s GetErrorMessage(ID.i)
@@ -6576,7 +6578,17 @@ Module PDF
     EndIf
     
   EndProcedure
-
+  
+  Procedure FreePDF(ID.i)
+    
+    If FindMapElement(PDF(), Str(ID))
+      
+      DeleteMapElement(PDF(), Str(ID))
+      
+    EndIf
+    
+  EndProcedure
+  
   ;{ ===== Basic Fonts - DataSection =====
   DataSection
     
@@ -7129,11 +7141,11 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf 
 
 ;- ========================
-; IDE Options = PureBasic 6.12 LTS (Windows - x64)
-; CursorPosition = 3422
-; FirstLine = 1061
-; Folding = cAAAAoACwAQAAASAACAAAAgT1AMDAcgfDAwxFQCEAAAEBIAAAAAAFQABAAAIOjIAqGAh3AA9
-; Markers = 591,1026,2203,2382,2482,3328,3844,3914
+; IDE Options = PureBasic 6.30 beta 6 (Windows - x64)
+; CursorPosition = 6585
+; FirstLine = 1706
+; Folding = cAAAAoACwAQAAASAACAAAAgT1AMDAcgfDAwxFQCEAAAEBIAAAAAAFQABAAAIOjIAqGAhtBA5
+; Markers = 593,1028,2205,2384,2484,3330,3846,3916
 ; EnableXP
 ; DPIAware
 ; EnablePurifier
