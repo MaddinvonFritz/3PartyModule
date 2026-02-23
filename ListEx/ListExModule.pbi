@@ -8040,7 +8040,7 @@ Module ListEx
   
   Procedure _MouseLeaveHandler()
     Define.i GadgetNum = EventGadget()
-    
+
     If FindMapElement(ListEx(), Str(GadgetNum))
       
        ; --- Scrollbar ---
@@ -8070,8 +8070,16 @@ Module ListEx
         Draw_()
       EndIf
       
-      BindShortcuts_(#False)
-      BindTabulator_(#False)
+      If GetActiveGadget() <> ListEx()\StringNum
+        BindShortcuts_(#False)
+        BindTabulator_(#False)
+      Else
+        If GetGadgetAttribute(GadgetNum, #PB_Canvas_MouseX) <= 0 Or GetGadgetAttribute(GadgetNum, #PB_Canvas_MouseX) => GadgetWidth(GadgetNum) Or GetGadgetAttribute(GadgetNum, #PB_Canvas_MouseY) <= 0 Or GetGadgetAttribute(GadgetNum, #PB_Canvas_MouseY) >= GadgetHeight(GadgetNum)
+          CloseEdit(GadgetNum)
+          BindShortcuts_(#False)
+          BindTabulator_(#False)
+        EndIf
+      EndIf
       
     EndIf
     
@@ -11828,9 +11836,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.30 beta 6 (Windows - x64)
-; CursorPosition = 8073
-; FirstLine = 2230
+; CursorPosition = 8042
+; FirstLine = 2215
 ; Folding = 2CkgAAAAAAAAEwMAgLegPAAACAAAgASAAQBAAMAAgPCAAACHYsEQQCA37AF6M+vQ+tHIPGBAAnDKsgB5AAAQAAAgCQiDiAAABAC0
-; Markers = 5484,5731,6159,6363,8043,8314,8597,8598,9719,11105
+; Markers = 5484,5731,6159,6363,8043,8322,8605,8606,9727,11113
 ; EnableXP
 ; DPIAware
