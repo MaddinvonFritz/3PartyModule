@@ -1785,7 +1785,7 @@ Module ListEx
   		  ListEx()\HScroll\maxPos = ListEx()\HScroll\Maximum - ListEx()\HScroll\PageLength + 1
   		  ListEx()\HScroll\Ratio  = ListEx()\HScroll\PageLength / ListEx()\HScroll\Maximum
   		  ListEx()\HScroll\Range  = ListEx()\HScroll\maxPos - ListEx()\HScroll\minPos
-  		  If ListEx()\HScroll\Pos < ListEx()\HScroll\minPos And ListEx()\HScroll\Pos > ListEx()\HScroll\maxPos : ListEx()\HScroll\Pos    = ListEx()\HScroll\Minimum : EndIf
+  		  If ListEx()\HScroll\Pos < ListEx()\HScroll\minPos Or ListEx()\HScroll\Pos > ListEx()\HScroll\maxPos : ListEx()\HScroll\Pos    = ListEx()\HScroll\Minimum : EndIf
   		EndIf 
 
     EndIf
@@ -1798,7 +1798,7 @@ Module ListEx
   		  ListEx()\VScroll\maxPos = ListEx()\VScroll\Maximum - ListEx()\VScroll\PageLength + 1
   		  ListEx()\VScroll\Ratio  = ListEx()\VScroll\PageLength / ListEx()\VScroll\Maximum
   		  ListEx()\VScroll\Range  = ListEx()\VScroll\maxPos - ListEx()\VScroll\minPos
-  		  If ListEx()\VScroll\Pos < ListEx()\VScroll\minPos And ListEx()\VScroll\Pos > ListEx()\VScroll\maxPos : ListEx()\VScroll\Pos    = ListEx()\VScroll\Minimum : EndIf
+  		  If ListEx()\VScroll\Pos < ListEx()\VScroll\minPos Or ListEx()\VScroll\Pos > ListEx()\VScroll\maxPos : ListEx()\VScroll\Pos    = ListEx()\VScroll\Minimum : EndIf
   		EndIf
   		
     EndIf 
@@ -11835,9 +11835,9 @@ CompilerIf #PB_Compiler_IsMainFile
   EndIf
   
 CompilerEndIf
-; IDE Options = PureBasic 6.30 beta 6 (Windows - x64)
-; CursorPosition = 8042
-; FirstLine = 2215
+; IDE Options = PureBasic 6.30 (Windows - x64)
+; CursorPosition = 1793
+; FirstLine = 861
 ; Folding = 2CkgAAAAAAAAEwMAgLegPAAACAAAgASAAQBAAMAAgPCAAACHYsEQQCA37AF6M+vQ+tHIPGBAAnDKsgB5AAAQAAAgCQiDiAAABAC0
 ; Markers = 5484,5731,6159,6363,8043,8322,8605,8606,9727,11113
 ; EnableXP
