@@ -24,6 +24,14 @@ pbPDF
 - Bugfix in MultiCell()
 - Add FreePDF()
 
+TreeEx
+
+- Add Drag
+- Bug No Map Element - Seit Win11, Fehler in C-Backend?
+- Bug? BackColor wurde nicht gezeichnet
+- Remove '''TimerThread\Num    = CreateThread(@_TimerThread(), #ScrollBar_Timer)''' , Fehler ist Wahrscheinlich #PB_Event_FirstCustomValue im Zusammenhang mit anderen Modulen
+- ClearItems() - Add SetState(GNum, -1); Auswahl aufheben
+
 ===== MIT License =====
 
 Copyright (c) 2019 Thorsten Hoeppner
