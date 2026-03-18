@@ -1,22 +1,22 @@
 Purebasic Module von [Hoeppner1867](https://github.com/Hoeppner1867/PureBasic/commits?author=Hoeppner1867)
 
-Module von Hoeppner1867, die ich für eines meiner Projekte etwas angepasst habe.
+Module von Hoeppner1867, die ich fÃ¼r eines meiner Projekte etwas angepasst habe.
 
 ListEx
 
 - BlendColor ist Transparent
-- Absturz bei Click auf eine leere Fläche
-- Fehler bei GetItemText wenn keine Spalte oder Zeile ausgewählt ist
-- Bessere Unterstützung von Maus und Scrollbar
+- Absturz bei Click auf eine leere FlÃ¤che
+- Fehler bei GetItemText wenn keine Spalte oder Zeile ausgewÃ¤hlt ist
+- Bessere UnterstÃ¼tzung von Maus und Scrollbar
 - #UseRealStringGadget erzeugt ein StringGadget() zur Eingabe
 - Focus Row bei Tab und ShiftTab (noch Abschaltbar machen?)
 - Add GetFingerprint() - CRC32 Fingerprint des gesamten Textes in der Tabelle
 - GetItemColor()
-- Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelöscht werden
+- Add #Autoclose - Muss bei ListEx::Gadget angegeben werden damit beim Event #PB_Event_CloseWindow automatisch das Gadget (Daten) gelÃ¶scht werden
 - Add FreeListExGadget() - Gibt das Gadget und wenn Angegeben das Canvas frei
-- Bug? CalcScrollRange_() Scrollbar wird nicht mehr auf 0 zurückgesetzt, wenn sie innerhalb des scrollbereiches liegt
+- Bug? CalcScrollRange_() Scrollbar wird nicht mehr auf 0 zurÃ¼ckgesetzt, wenn sie innerhalb des scrollbereiches liegt
 - Beim Verlassen des Gadget mit der Maus wird BindShortcuts_(#False) und BindTabulator_(#False) aufgerufen. Ansonsten funktionieren Enter und Tab nicht mehr im EditorGadget.
-- BUG wenn StringGadget Aktiv ist wurde BindShortcuts_(#False), BindTabulator_(#False) ausgeführt
+- BUG wenn StringGadget Aktiv ist wurde BindShortcuts_(#False), BindTabulator_(#False) ausgefÃ¼hrt
 - BUG beim Berechnen der Scrollbar
 
 pbPDF
@@ -29,7 +29,7 @@ TreeEx
 - Add Drag
 - Bug No Map Element - Seit Win11, Fehler in C-Backend?
 - Bug? BackColor wurde nicht gezeichnet
-- Remove '''TimerThread\Num    = CreateThread(@_TimerThread(), #ScrollBar_Timer)''' , Fehler ist Wahrscheinlich #PB_Event_FirstCustomValue im Zusammenhang mit anderen Modulen
+- Remove `TimerThread\Num    = CreateThread(@_TimerThread(), #ScrollBar_Timer)` , Fehler ist Wahrscheinlich #PB_Event_FirstCustomValue im Zusammenhang mit anderen Modulen
 - ClearItems() - Add SetState(GNum, -1); Auswahl aufheben
 
 ===== MIT License =====
