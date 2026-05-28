@@ -2744,6 +2744,10 @@ Module TreeEx
 			    ;}
 			  ElseIf (TreeEx()\Flags & #FullRowSelect And X < TreeEx()\Size\Cols - TreeEx()\Col\OffsetX And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
 			    If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
+			      If TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
+			        Outsite = #False
+			        Break
+			      EndIf
 			      TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
             PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
             PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
@@ -2791,7 +2795,11 @@ Module TreeEx
 	    ForEach TreeEx()\Rows()
 	      
 	      If (TreeEx()\Flags & #FullRowSelect And X < TreeEx()\Size\Cols - TreeEx()\Col\OffsetX And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
-			    If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
+	        If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
+	          If TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
+			        Outsite = #False
+			        Break
+			      EndIf
 			      TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
             PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
             PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
@@ -4445,7 +4453,7 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.40 (Windows - x64)
-; CursorPosition = 2792
+; CursorPosition = 2801
 ; FirstLine = 2596
 ; Folding = ---------------X+------4P----------------
 ; EnableThread
