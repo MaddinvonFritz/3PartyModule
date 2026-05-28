@@ -32,7 +32,8 @@ TreeEx
 - Remove `TimerThread\Num    = CreateThread(@_TimerThread(), #ScrollBar_Timer)` , Fehler ist Wahrscheinlich #PB_Event_FirstCustomValue im Zusammenhang mit anderen Modulen
 - ClearItems() - Add SetState(GNum, -1); Auswahl aufheben
 - Auswahl über Rechtsclick, kann Aktiviert werden mit #ActivateRightMouseClick
-- Ein Click ausserhalb (weißer Bereich) löscht die Auswahl, bei #ActivateRightMouseClick auch mit der rechten Maustaste
+- Ein Klick ausserhalb (weißer Bereich) löscht die Auswahl, bei #ActivateRightMouseClick auch mit der rechten Maustaste
+- Mit #FullRowSelect kann man eine Zeile auf der ganzen Breite auswählen, nicht nur mit Klick auf den ersten Text
 
 ===== MIT License =====
 
