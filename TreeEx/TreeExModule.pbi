@@ -2612,7 +2612,7 @@ Module TreeEx
   
   Procedure _LeftButtonDownHandler()
     Define.s ScrollBar
-		Define.i X, Y
+		Define.i X, Y, Outsite = #True, hoehe
 		Define.i GNum = EventGadget()
 
 		If FindMapElement(TreeEx(), Str(GNum))
@@ -2718,6 +2718,8 @@ Module TreeEx
 			      EndIf  
 			      
 			      ReDraw_()
+			      
+			      Outsite = #False
 			      Break
 			    EndIf
 			    ;}
@@ -2733,7 +2735,9 @@ Module TreeEx
 			      EndIf
 			      PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_CheckBox)
             PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_CheckBox)
-			      ReDraw_()
+            ReDraw_()
+            
+            Outsite = #False
 			      Break
 			    EndIf  
 			    ;}
@@ -2748,9 +2752,25 @@ Module TreeEx
             TreeEx()\Drag\MouseX = X
             TreeEx()\Drag\MouseY = Y
             
+            Outsite = #False
 			      Break
 			    EndIf ;}
-			  EndIf  
+			  EndIf
+			  
+			  If Outsite = #True
+			    
+			    If TreeEx()\Flags & #ShowHeader
+			      hoehe + TreeEx()\Row\Header\Height
+			    EndIf
+			    hoehe + TreeEx()\Size\Rows - (TreeEx()\Row\Height * TreeEx()\Row\Offset)
+			    
+			    If X > TreeEx()\Size\Cols - TreeEx()\Col\OffsetX Or Y > hoehe
+  			    TreeEx()\Row\Focus = -1
+  			    PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+            PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+            ReDraw_()  
+          EndIf
+			  EndIf
 			  
 			Next
 
@@ -2759,7 +2779,7 @@ Module TreeEx
 	EndProcedure
 	
 	Procedure _RightButtonDownHandler()
-	  Define.i X, Y
+	  Define.i X, Y, Outsite = #True, hoehe
 	  Define.i GNum = EventGadget()
 	  
 	  If FindMapElement(TreeEx(), Str(GNum)) And TreeEx()\Flags & #ActivateRightMouseClick
@@ -2776,11 +2796,27 @@ Module TreeEx
             PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
             ReDraw_()
             
+            Outsite = #False
 			      Break
 			    EndIf ;}
 			  EndIf 
 	      
-	    Next
+			Next
+			
+			If Outsite = #True
+			  
+			  If TreeEx()\Flags & #ShowHeader
+			    hoehe + TreeEx()\Row\Header\Height
+			  EndIf
+			  hoehe + TreeEx()\Size\Rows - (TreeEx()\Row\Height * TreeEx()\Row\Offset)
+			  
+			  If X > TreeEx()\Size\Cols - TreeEx()\Col\OffsetX Or Y > hoehe
+			    TreeEx()\Row\Focus = -1
+			    PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+			    PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+			    ReDraw_()  
+			  EndIf
+			EndIf
 	    
 	  EndIf
 	  
@@ -4408,9 +4444,9 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.40 (Windows - x64)
-; CursorPosition = 90
-; FirstLine = 255
-; Folding = -----------------------4P----------------
+; CursorPosition = 2810
+; FirstLine = 2694
+; Folding = -----------------------4-----------------
 ; EnableThread
 ; EnableXP
 ; DPIAware
