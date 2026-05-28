@@ -143,6 +143,8 @@ DeclareModule TreeEx
 		#FitTreeColumn
 		#AlwaysShowSelection
 		#UseExistingCanvas
+		
+		#ActivateRightMouseClick
 	EndEnumeration ;}
 	
 	#Left = 0
@@ -2756,6 +2758,34 @@ Module TreeEx
 
 	EndProcedure
 	
+	Procedure _RightButtonDownHandler()
+	  Define.i X, Y
+	  Define.i GNum = EventGadget()
+	  
+	  If FindMapElement(TreeEx(), Str(GNum)) And TreeEx()\Flags & #ActivateRightMouseClick
+	    
+	    X = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseX)
+			Y = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseY)
+	    
+	    ForEach TreeEx()\Rows()
+	      
+	      If X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width              ;{ Select row
+			    If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
+			      TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
+            PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+            PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+            ReDraw_()
+            
+			      Break
+			    EndIf ;}
+			  EndIf 
+	      
+	    Next
+	    
+	  EndIf
+	  
+	EndProcedure
+	
 	Procedure _LeftButtonUpHandler()
     Define.s ScrollBar
 		Define.i X, Y
@@ -3482,6 +3512,7 @@ Module TreeEx
 				BindGadgetEvent(TreeEx()\CanvasNum, @_ResizeHandler(),          #PB_EventType_Resize)
 				BindGadgetEvent(TreeEx()\CanvasNum, @_MouseMoveHandler(),       #PB_EventType_MouseMove)
 				BindGadgetEvent(TreeEx()\CanvasNum, @_LeftButtonDownHandler(),  #PB_EventType_LeftButtonDown)
+				BindGadgetEvent(TreeEx()\CanvasNum, @_RightButtonDownHandler(),  #PB_EventType_RightButtonDown)
 				BindGadgetEvent(TreeEx()\CanvasNum, @_LeftButtonUpHandler(),    #PB_EventType_LeftButtonUp)
 				BindGadgetEvent(TreeEx()\CanvasNum, @_LeftDoubleClickHandler(), #PB_EventType_LeftDoubleClick)
 				BindGadgetEvent(TreeEx()\CanvasNum, @_MouseLeaveHandler(),      #PB_EventType_MouseLeave)
@@ -4376,10 +4407,10 @@ CompilerIf #PB_Compiler_IsMainFile
   EndIf 
   
 CompilerEndIf
-; IDE Options = PureBasic 6.30 beta 6 (Windows - x64)
-; CursorPosition = 1584
-; FirstLine = 1549
-; Folding = -----------------------------------------
+; IDE Options = PureBasic 6.40 (Windows - x64)
+; CursorPosition = 90
+; FirstLine = 255
+; Folding = -----------------------4P----------------
 ; EnableThread
 ; EnableXP
 ; DPIAware

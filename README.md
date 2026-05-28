@@ -31,6 +31,7 @@ TreeEx
 - Bug? BackColor wurde nicht gezeichnet
 - Remove '''TimerThread\Num    = CreateThread(@_TimerThread(), #ScrollBar_Timer)''' , Fehler ist Wahrscheinlich #PB_Event_FirstCustomValue im Zusammenhang mit anderen Modulen
 - ClearItems() - Add SetState(GNum, -1); Auswahl aufheben
+- Auswahl über Rechtsclick, kann Aktiviert werden mit #ActivateRightMouseClick
 
 ===== MIT License =====
 
