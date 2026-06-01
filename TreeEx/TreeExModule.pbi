@@ -2745,6 +2745,10 @@ Module TreeEx
 			  ElseIf (TreeEx()\Flags & #FullRowSelect And X < TreeEx()\Size\Cols - TreeEx()\Col\OffsetX And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
 			    If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
 			      If TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
+			        TreeEx()\Drag\Drag = #True
+              TreeEx()\Drag\MouseX = X
+              TreeEx()\Drag\MouseY = Y
+			        
 			        Outsite = #False
 			        Break
 			      EndIf
@@ -4453,8 +4457,8 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.40 (Windows - x64)
-; CursorPosition = 2801
-; FirstLine = 2596
+; CursorPosition = 2748
+; FirstLine = 2569
 ; Folding = ---------------X+------4P----------------
 ; EnableThread
 ; EnableXP

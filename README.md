@@ -35,6 +35,7 @@ TreeEx
 - Ein Klick ausserhalb (weißer Bereich) löscht die Auswahl, bei #ActivateRightMouseClick auch mit der rechten Maustaste
 - Mit #FullRowSelect kann man eine Zeile auf der ganzen Breite auswählen, nicht nur mit Klick auf den ersten Text
 - Ist eine Zeile schon ausgewählt, wird beim erneuten auswählen der Zeile kein Event ausgelösst.
+- BUG: War eine Zeile ausgewählt, konnte keine Drag Aktion ausgeführt werden.
 
 ===== MIT License =====
 
