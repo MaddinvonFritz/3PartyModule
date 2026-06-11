@@ -2621,6 +2621,9 @@ Module TreeEx
 			X = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseX)
 			Y = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseY)
 			
+			Debug X
+			Debug Y
+			
 			ForEach TreeEx()\ScrollBar\Item() ;{ ScrollBars
       
         If TreeEx()\ScrollBar\Item()\Hide : Continue : EndIf 
@@ -2700,8 +2703,8 @@ Module TreeEx
       Next 
 			
 			ForEach TreeEx()\Rows()
-			  
 			  If X >= TreeEx()\Rows()\Button\X And X <= TreeEx()\Rows()\Button\X + dpiX(#ButtonSize)                       ;{ Button
+			    Debug "Button"
 			    If Y >= TreeEx()\Rows()\Button\Y And Y <= TreeEx()\Rows()\Button\Y + dpiX(#ButtonSize)
 			      
 			      TreeEx()\Rows()\Button\State ! #True
@@ -2725,6 +2728,7 @@ Module TreeEx
 			    EndIf
 			    ;}
 			  ElseIf  X >= TreeEx()\Rows()\CheckBox\X And X <= TreeEx()\Rows()\CheckBox\X + TreeEx()\Rows()\CheckBox\Size  ;{ CheckBox 
+			    Debug "Checkbox"
 			    If Y >= TreeEx()\Rows()\CheckBox\Y And Y <= TreeEx()\Rows()\CheckBox\Y + TreeEx()\Rows()\CheckBox\Size
 			      If TreeEx()\Rows()\State & #Checked
 			        TreeEx()\Rows()\State & ~#Checked
@@ -2742,7 +2746,9 @@ Module TreeEx
 			      Break
 			    EndIf  
 			    ;}
-			  ElseIf (TreeEx()\Flags & #FullRowSelect And X < TreeEx()\Size\Cols - TreeEx()\Col\OffsetX And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
+			  
+			  ElseIf (TreeEx()\Flags & #FullRowSelect And X < dpiX(TreeEx()\Size\Cols) - dpiX(TreeEx()\Col\OffsetX) And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
+			    Debug "Select"
 			    If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
 			      If TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
 			        TreeEx()\Drag\Drag = #True
@@ -2766,22 +2772,22 @@ Module TreeEx
 			    EndIf ;}
 			  EndIf
 			  
-			  If Outsite = #True; ButtonDown ausserhalb der Anzeige (weißer Bereich)
-			    
-			    If TreeEx()\Flags & #ShowHeader
-			      hoehe + TreeEx()\Row\Header\Height
-			    EndIf
-			    hoehe + TreeEx()\Size\Rows - (TreeEx()\Row\Height * TreeEx()\Row\Offset)
-			    
-			    If X > TreeEx()\Size\Cols - TreeEx()\Col\OffsetX Or Y > hoehe
-  			    TreeEx()\Row\Focus = -1
-  			    PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
-            PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
-            ReDraw_()  
-          EndIf
-			  EndIf
-			  
 			Next
+			
+			If Outsite = #True; ButtonDown ausserhalb der Anzeige (weißer Bereich)
+			  
+			  If TreeEx()\Flags & #ShowHeader
+			    hoehe + dpiY(TreeEx()\Row\Header\Height)
+			  EndIf
+			  hoehe + TreeEx()\Size\Rows - (dpiY(TreeEx()\Row\Height) * TreeEx()\Row\Offset)
+			  
+			  If (TreeEx()\Flags & #FullRowSelect And X > dpiX(TreeEx()\Size\Cols) - TreeEx()\Col\OffsetX) Or X > TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width Or Y > hoehe
+			    TreeEx()\Row\Focus = -1
+			    PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+			    PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
+			    ReDraw_()  
+			  EndIf
+			EndIf
 
 		EndIf
 
@@ -2795,10 +2801,13 @@ Module TreeEx
 	    
 	    X = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseX)
 			Y = GetGadgetAttribute(TreeEx()\CanvasNum, #PB_Canvas_MouseY)
-	    
+			
+			Debug X
+			Debug Y
+			
 	    ForEach TreeEx()\Rows()
 	      
-	      If (TreeEx()\Flags & #FullRowSelect And X < TreeEx()\Size\Cols - TreeEx()\Col\OffsetX And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
+	      If (TreeEx()\Flags & #FullRowSelect And X < dpiX(TreeEx()\Size\Cols) - dpix(TreeEx()\Col\OffsetX) And X > TreeEx()\Rows()\Text\X) Or (X >= TreeEx()\Rows()\Text\X And X <= TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width);{ Select row
 	        If Y >= TreeEx()\Rows()\Y And Y <= TreeEx()\Rows()\Y + dpiY(TreeEx()\Row\Height)
 	          If TreeEx()\Row\Focus = ListIndex(TreeEx()\Rows())
 			        Outsite = #False
@@ -2819,11 +2828,11 @@ Module TreeEx
 			If Outsite = #True
 			  
 			  If TreeEx()\Flags & #ShowHeader
-			    hoehe + TreeEx()\Row\Header\Height
+			    hoehe + dpiY(TreeEx()\Row\Header\Height)
 			  EndIf
-			  hoehe + TreeEx()\Size\Rows - (TreeEx()\Row\Height * TreeEx()\Row\Offset)
+			  hoehe + TreeEx()\Size\Rows - (dpiY(TreeEx()\Row\Height) * TreeEx()\Row\Offset)
 			  
-			  If X > TreeEx()\Size\Cols - TreeEx()\Col\OffsetX Or Y > hoehe
+			  If (TreeEx()\Flags & #FullRowSelect And X > dpiX(TreeEx()\Size\Cols) - TreeEx()\Col\OffsetX) Or X > TreeEx()\Rows()\Text\X + TreeEx()\Rows()\Text\Width Or Y > hoehe
 			    TreeEx()\Row\Focus = -1
 			    PostEvent(#PB_Event_Gadget, TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
 			    PostEvent(#Event_Gadget,    TreeEx()\Window\Num, TreeEx()\CanvasNum, #EventType_Row, TreeEx()\Row\Focus)
@@ -4457,8 +4466,8 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 ; IDE Options = PureBasic 6.40 (Windows - x64)
-; CursorPosition = 2748
-; FirstLine = 2569
+; CursorPosition = 2777
+; FirstLine = 2589
 ; Folding = ---------------X+------4P----------------
 ; EnableThread
 ; EnableXP
